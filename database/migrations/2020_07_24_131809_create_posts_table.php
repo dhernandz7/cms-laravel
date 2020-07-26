@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->enum('status', ['PUBLISHED', 'DRAFT'])->default('DRAFT');
             $table->string('file', 128)->nullable();
+            $table->string('file_temp', 128)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

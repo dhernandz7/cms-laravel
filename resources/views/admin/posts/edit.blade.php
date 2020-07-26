@@ -8,7 +8,7 @@
 					Modificar entrada  <strong>{{$post->id}}</strong>
 				</div>
 				<div class="card-body">
-					{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT']) !!}
+					{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
 					<slug-component title="Nombre de la entrada" input="name" value="{{ $post->name}}"></slug-component>
 					@include('admin.posts.partials.form')
 					{!! Form::close() !!}
@@ -20,8 +20,12 @@
 @endsection
 
 @section('importscript')
-<script src="/js/vendor/ckeditor/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
 <script>
-	ClassicEditor.create(document.querySelector('#body'))
+    ClassicEditor
+    .create(document.querySelector('#body'))
+    .catch(error=>{
+        console.error(error);
+    });                                             
 </script>
 @endsection

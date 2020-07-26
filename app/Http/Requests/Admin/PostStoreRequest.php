@@ -24,7 +24,20 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'slug' => 'required|unique:posts,slug',
+            'category_id' => 'required|integer',
+            'tags' => 'required|array',
+            'body' => 'required',
+            'status' => 'required|in:DRAFT,PUBLISHED',
+            'file' => 'nullable|mimes:jpg,jpeg,png'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'categoria',
         ];
     }
 }

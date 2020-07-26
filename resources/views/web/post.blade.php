@@ -10,7 +10,7 @@
 			</div>
 			<div class="card-body">
 				@if($post->file)
-				<img alt="" class="img-fluid" src="{{$post->file}}">
+				<img alt="" class="img-fluid" src="/storage/{{$post->file}}">
 				@endif
 				{{ $post->excerpt }}
 				<hr>

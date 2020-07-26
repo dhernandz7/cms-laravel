@@ -9,7 +9,7 @@
 				</div>
 				<div class="card-body">
 					{!! Form::open(['route' => 'categories.store', 'method' => 'POST', 'autocomplete' => 'off']) !!}
-					<slug-component title="Nombre de la etiqueta" input="name" value=""></slug-component>
+					<slug-component title="Nombre de la categoria" input="name" value=""></slug-component>
 					@include('admin.categories.partials.form')
 					{!! Form::close() !!}
 				</div>

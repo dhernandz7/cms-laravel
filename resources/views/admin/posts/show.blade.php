@@ -5,23 +5,23 @@
 		<div class="col-md-8 offset-md-2">
 			<div class="card">
 				<div class="card-header">
-					Ver categoria <strong>{{$category->id}}</strong>
+					Ver entrada <strong>{{$post->id}}</strong>
 				</div>
 				<div class="card-body">
 					<p>
 						<strong>Nombre:</strong>
-						{{ $category->name}}
+						{{ $post->name}}
 					</p>
 					<p>
 						<strong>Slug:</strong>
-						{{ $category->slug}}
+						{{ $post->slug}}
 					</p>
 					<p>
 						<strong>Descripción:</strong>
-						{{ $category->body}}
+						{{ $post->body}}
 					</p>
-					<a class="btn btn-sm btn-primary" href="{{ route('categories.edit', $category->id) }}">
-						Modificar categoria
+					<a class="btn btn-sm btn-primary" href="{{ route('posts.edit', $post->id) }}">
+						Modificar entrada
 					</a>
 				</div>
 			</div>

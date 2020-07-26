@@ -10,7 +10,9 @@
 			</div>
 			<div class="card-body">
 				@if($post->file)
-				<img alt="" class="img-fluid" src="{{$post->file}}">
+				<a class="float-right" href="{{ route('post', $post->slug)}}">
+					<img alt="" class="img-fluid" src="{{$post->file}}">
+				</a>
 				@endif
 				{{ $post->excerpt }}
 				<a class="float-right" href="{{ route('post', $post->slug)}}">Leer más</a>

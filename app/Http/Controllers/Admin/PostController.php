@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Post;
+use App\Category;
+use App\Tag;
+use App\Http\Requests\Admin\PostStoreRequest;
+use App\Http\Requests\Admin\PostUpdateRequest;
 
 class PostController extends Controller
 {
@@ -12,9 +17,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $posts = Post::where('user_id', $request->user()->id)->orderBy('id', 'DESC')->paginate(5);
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -24,7 +30,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name', 'ASC')->pluck('name', 'id');
+        $tags = Tag::orderBy('name', 'ASC')->get();
+        return view('admin.posts.create', compact('categories','tags'));
     }
 
     /**
@@ -33,9 +41,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        //
+        $post = Post::create($request->all());
+        return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada creada con éxito');
     }
 
     /**
@@ -46,7 +55,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -57,7 +67,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::orderBy('name', 'ASC')->pluck('name', 'id');
+        $tags = Tag::orderBy('name', 'ASC')->get();
+        $post = Post::find($id);
+        return view('admin.posts.edit', compact('categories','tags', 'post'));
+
     }
 
     /**
@@ -67,9 +81,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostUpdateRequest $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->fill($request->all())->save();
+        return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada actualizada con éxito');
     }
 
     /**
@@ -80,6 +96,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return back()->with('info', "La entrada \"$post->name\" fue eliminada correctamente");
     }
 }

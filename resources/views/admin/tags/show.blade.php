@@ -6,9 +6,6 @@
 			<div class="card">
 				<div class="card-header">
 					Ver etiqueta  <strong>{{$tag->id}}</strong>
-					<a class="btn btn-sm btn-primary float-right" href="{{ route('tags.edit', $tag->id) }}">
-						Modificar etiqueta
-					</a>
 				</div>
 				<div class="card-body">
 					<p>
@@ -19,6 +16,9 @@
 						<strong>Slug:</strong>
 						{{ $tag->slug}}
 					</p>
+					<a class="btn btn-sm btn-primary" href="{{ route('tags.edit', $tag->id) }}">
+						Modificar etiqueta
+					</a>
 				</div>
 			</div>
 		</div>

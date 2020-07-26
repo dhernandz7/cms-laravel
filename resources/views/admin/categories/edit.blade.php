@@ -9,7 +9,7 @@
 				</div>
 				<div class="card-body">
 					{!! Form::model($category, ['route' => ['categories.update', $category->id], 'method' => 'PUT']) !!}
-					<slug-component title="Nombre de la etiqueta" input="name" value="{{ $category->name}}"></slug-component>
+					<slug-component title="Nombre de la categoria" input="name" value="{{ $category->name}}"></slug-component>
 					@include('admin.categories.partials.form')
 					{!! Form::close() !!}
 				</div>
